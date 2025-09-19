@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert } from 'react-native';
+import { View, Text, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { monitoringStyles as styles } from '../../styles/monitoring';
 
@@ -11,6 +11,18 @@ export default function Monitoring() {
     temperature: 24,
     humidity: 60,
   });
+  const [isMoving, setIsMoving] = useState(false);
+  const [autoMode, setAutoMode] = useState(false);
+
+  const handleMovement = (direction) => {
+    setIsMoving(true);
+    console.log(`Moving ${direction}`);
+    setTimeout(() => setIsMoving(false), 500);
+  };
+
+  const handleEmergencyStop = () => {
+    Alert.alert('Emergency Stop', 'Robot has been stopped immediately!', [{ text: 'OK' }]);
+  };
 
   const getRiskLevel = () => {
     if (sensorData.gasLevel > 50 || sensorData.tilt > 5) return 'HIGH';
@@ -74,6 +86,73 @@ export default function Monitoring() {
           <Ionicons name="warning" size={20} color="#FF9800" />
           <Text style={styles.alertText}>Slight tilt detected - Monitor closely</Text>
         </View>
+      </View>
+
+      <View style={styles.controlSection}>
+        <Text style={styles.controlTitle}>Robot Control</Text>
+        
+        <View style={styles.controlHeader}>
+          <TouchableOpacity 
+            style={[styles.modeToggle, autoMode && styles.modeToggleActive]}
+            onPress={() => setAutoMode(!autoMode)}
+          >
+            <Text style={[styles.modeText, autoMode && styles.modeTextActive]}>
+              {autoMode ? 'AUTO' : 'MANUAL'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.controlPad}>
+          <TouchableOpacity 
+            style={styles.directionButton}
+            onPress={() => handleMovement('forward')}
+            disabled={isMoving || autoMode}
+          >
+            <Ionicons name="chevron-up" size={24} color="white" />
+          </TouchableOpacity>
+
+          <View style={styles.middleRow}>
+            <TouchableOpacity 
+              style={styles.directionButton}
+              onPress={() => handleMovement('left')}
+              disabled={isMoving || autoMode}
+            >
+              <Ionicons name="chevron-back" size={24} color="white" />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.stopButton}
+              onPress={() => handleMovement('stop')}
+              disabled={autoMode}
+            >
+              <Ionicons name="stop" size={24} color="white" />
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={styles.directionButton}
+              onPress={() => handleMovement('right')}
+              disabled={isMoving || autoMode}
+            >
+              <Ionicons name="chevron-forward" size={24} color="white" />
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity 
+            style={styles.directionButton}
+            onPress={() => handleMovement('backward')}
+            disabled={isMoving || autoMode}
+          >
+            <Ionicons name="chevron-down" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity 
+          style={styles.emergencyButton}
+          onPress={handleEmergencyStop}
+        >
+          <Ionicons name="warning" size={20} color="white" />
+          <Text style={styles.emergencyText}>EMERGENCY STOP</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
