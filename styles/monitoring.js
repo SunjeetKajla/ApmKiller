@@ -105,20 +105,14 @@ export const monitoringStyles = StyleSheet.create({
   },
   controlSection: {
     margin: 20,
-    padding: 20,
+    padding: 15,
     backgroundColor: 'white',
     borderRadius: 10,
     elevation: 3,
   },
-  controlTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 15,
-    textAlign: 'center',
-  },
   controlHeader: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   modeToggle: {
     paddingHorizontal: 15,
@@ -138,7 +132,7 @@ export const monitoringStyles = StyleSheet.create({
   },
   controlPad: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 15,
   },
   directionButton: {
     width: 60,

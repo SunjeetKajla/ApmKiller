@@ -47,50 +47,7 @@ export default function Monitoring() {
         <Text style={styles.videoSubtext}>Connecting...</Text>
       </View>
 
-      <View style={styles.riskMeter}>
-        <Text style={styles.riskTitle}>Structural Risk Assessment</Text>
-        <View style={[styles.riskIndicator, { backgroundColor: getRiskColor() }]}>
-          <Text style={styles.riskText}>{getRiskLevel()} RISK</Text>
-        </View>
-      </View>
-
-      <View style={styles.sensorsGrid}>
-        <View style={styles.sensorCard}>
-          <Ionicons name="cloud" size={24} color="#FF5722" />
-          <Text style={styles.sensorLabel}>Gas Level</Text>
-          <Text style={styles.sensorValue}>{sensorData.gasLevel} ppm</Text>
-        </View>
-
-        <View style={styles.sensorCard}>
-          <Ionicons name="phone-portrait" size={24} color="#2196F3" />
-          <Text style={styles.sensorLabel}>Tilt Angle</Text>
-          <Text style={styles.sensorValue}>{sensorData.tilt}°</Text>
-        </View>
-
-        <View style={styles.sensorCard}>
-          <Ionicons name="scan" size={24} color="#9C27B0" />
-          <Text style={styles.sensorLabel}>Distance</Text>
-          <Text style={styles.sensorValue}>{sensorData.distance} cm</Text>
-        </View>
-
-        <View style={styles.sensorCard}>
-          <Ionicons name="thermometer" size={24} color="#FF9800" />
-          <Text style={styles.sensorLabel}>Temperature</Text>
-          <Text style={styles.sensorValue}>{sensorData.temperature}°C</Text>
-        </View>
-      </View>
-
-      <View style={styles.alertsSection}>
-        <Text style={styles.alertsTitle}>Recent Alerts</Text>
-        <View style={styles.alert}>
-          <Ionicons name="warning" size={20} color="#FF9800" />
-          <Text style={styles.alertText}>Slight tilt detected - Monitor closely</Text>
-        </View>
-      </View>
-
       <View style={styles.controlSection}>
-        <Text style={styles.controlTitle}>Robot Control</Text>
-        
         <View style={styles.controlHeader}>
           <TouchableOpacity 
             style={[styles.modeToggle, autoMode && styles.modeToggleActive]}
@@ -153,6 +110,47 @@ export default function Monitoring() {
           <Ionicons name="warning" size={20} color="white" />
           <Text style={styles.emergencyText}>EMERGENCY STOP</Text>
         </TouchableOpacity>
+      </View>
+
+      <View style={styles.riskMeter}>
+        <Text style={styles.riskTitle}>Structural Risk Assessment</Text>
+        <View style={[styles.riskIndicator, { backgroundColor: getRiskColor() }]}>
+          <Text style={styles.riskText}>{getRiskLevel()} RISK</Text>
+        </View>
+      </View>
+
+      <View style={styles.sensorsGrid}>
+        <View style={styles.sensorCard}>
+          <Ionicons name="cloud" size={24} color="#FF5722" />
+          <Text style={styles.sensorLabel}>Gas Level</Text>
+          <Text style={styles.sensorValue}>{sensorData.gasLevel} ppm</Text>
+        </View>
+
+        <View style={styles.sensorCard}>
+          <Ionicons name="phone-portrait" size={24} color="#2196F3" />
+          <Text style={styles.sensorLabel}>Tilt Angle</Text>
+          <Text style={styles.sensorValue}>{sensorData.tilt}°</Text>
+        </View>
+
+        <View style={styles.sensorCard}>
+          <Ionicons name="scan" size={24} color="#9C27B0" />
+          <Text style={styles.sensorLabel}>Distance</Text>
+          <Text style={styles.sensorValue}>{sensorData.distance} cm</Text>
+        </View>
+
+        <View style={styles.sensorCard}>
+          <Ionicons name="thermometer" size={24} color="#FF9800" />
+          <Text style={styles.sensorLabel}>Temperature</Text>
+          <Text style={styles.sensorValue}>{sensorData.temperature}°C</Text>
+        </View>
+      </View>
+
+      <View style={styles.alertsSection}>
+        <Text style={styles.alertsTitle}>Recent Alerts</Text>
+        <View style={styles.alert}>
+          <Ionicons name="warning" size={20} color="#FF9800" />
+          <Text style={styles.alertText}>Slight tilt detected - Monitor closely</Text>
+        </View>
       </View>
     </ScrollView>
   );
